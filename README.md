@@ -11,5 +11,4 @@
 ### Back
 
 - Nest
-- MySQL, MongoDB
--
+- MongoDB
