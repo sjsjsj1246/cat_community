@@ -28,9 +28,15 @@ import { CatRequestDto } from '../dto/cats.request.dto';
 @UseFilters(HttpExceptionFilter)
 export class CatsController {
   constructor(
-    private readonly catService: CatsService,
+    private readonly catsService: CatsService,
     private readonly authService: AuthService,
   ) {}
+
+  @ApiOperation({ summary: '모든 고양이 가져오기' })
+  @Get('all')
+  getAllCat() {
+    return this.catsService.getAllCat();
+  }
 
   @ApiOperation({ summary: '현재 고객의 데이터 가져오기' })
   @UseGuards(JwtAuthGuard)
@@ -44,14 +50,14 @@ export class CatsController {
   @ApiOperation({ summary: '회원가입' })
   @Post('signup')
   async signup(@Body() body: CatRequestDto) {
-    return await this.catService.signup(body);
+    return await this.catsService.signup(body);
   }
 
   @ApiResponse({ status: 500, description: 'Server Error...' })
   @ApiResponse({ status: 200, description: 'Success!', type: ReadOnlyCatDto })
   @ApiOperation({ summary: '로그인' })
   @Post('login')
-  login(@Body() body: CatRequestDto) {
+  login(@Body() body: any) {
     return this.authService.jwtLogIn(body);
   }
 
@@ -70,6 +76,6 @@ export class CatsController {
     @CurrentUser() cat: Cat,
   ) {
     // return { image: `http://localhost:8000/media/cats/${files[0].filename}` };
-    return this.catService.uploadImg(cat, files);
+    return this.catsService.uploadImg(cat, files);
   }
 }

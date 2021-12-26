@@ -15,7 +15,7 @@ function Home() {
   const [cats, setCats] = useState([]);
 
   const getCats = async () => {
-    const response = await axios.get(`${api.cats}`, {
+    const response = await axios.get(`${api.cats}/all`, {
       withCredentials: true,
     });
     console.log(response.data.data);

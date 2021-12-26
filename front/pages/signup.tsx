@@ -26,7 +26,7 @@ const Signup = () => {
     const data = { email, name, password };
     console.log(data);
     try {
-      const response = await axios.post(`${api.cats}/signup`, data, {
+      const response = await axios.post(api.cats, data, {
         withCredentials: true,
       });
       console.log(response.data);
@@ -39,7 +39,7 @@ const Signup = () => {
         alert(error.message);
       }
     }
-  }, [email, name, password]);
+  }, [email, password]);
 
   return (
     <>
